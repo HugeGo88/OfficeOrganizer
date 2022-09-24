@@ -29,6 +29,7 @@
             <Button
                 Grid.Column="1"
                 Margin="0,20,12,0"
+                Command="{x:Bind ViewModel.LoadCommand}"
                 Content="Laden" />
         </Grid>
         <StackPanel Grid.Row="1">
@@ -43,28 +44,57 @@
                 Y1="0"
                 Y2="0" />
             <StackPanel Orientation="Horizontal">
-                <CheckBox Margin="12" Content="Briefanschrift" />
-                <CheckBox Margin="12" Content="Unterschrift" />
-                <CheckBox Margin="12" Content="Datum setzen" />
+                <CheckBox
+                    Margin="12"
+                    Content="Briefanschrift"
+                    IsChecked="{x:Bind ViewModel.Header, Mode=TwoWay}" />
+                <CheckBox
+                    Margin="12"
+                    Content="Unterschrift"
+                    IsChecked="{x:Bind ViewModel.Signing, Mode=TwoWay}" />
+                <CheckBox
+                    Margin="12"
+                    Content="Datum setzen"
+                    IsChecked="{x:Bind ViewModel.CustomeDate, Mode=TwoWay}" />
             </StackPanel>
-            <TextBox Margin="12,0,12,0" Header="Firma" />
+            <TextBox
+                Margin="12,0,12,0"
+                Header="Firma"
+                Text="{x:Bind ViewModel.Company, Mode=TwoWay}"
+                Visibility="{x:Bind ViewModel.Header, Mode=OneWay}" />
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBox Margin="12,0,12,0" Header="Vorname" />
+                <TextBox
+                    Margin="12,0,12,0"
+                    Header="Vorname"
+                    Text="{x:Bind ViewModel.FirstName, Mode=TwoWay}"
+                    Visibility="{x:Bind ViewModel.Header, Mode=OneWay}" />
                 <TextBox
                     Grid.Column="1"
                     Margin="12,0,12,0"
-                    Header="Nachname" />
+                    Header="Nachname"
+                    Text="{x:Bind ViewModel.LastName, Mode=TwoWay}"
+                    Visibility="{x:Bind ViewModel.Header, Mode=OneWay}" />
             </Grid>
-            <TextBox Margin="12,0,12,0" Header="Straßenname und Hausnummer" />
-            <TextBox Margin="12,0,12,0" Header="Postleitzahl und Ort" />
+            <TextBox
+                Margin="12,0,12,0"
+                Header="Straßenname und Hausnummer"
+                Text="{x:Bind ViewModel.Street, Mode=TwoWay}"
+                Visibility="{x:Bind ViewModel.Header, Mode=OneWay}" />
+            <TextBox
+                Margin="12,0,12,0"
+                Header="Postleitzahl und Ort"
+                Text="{x:Bind ViewModel.City, Mode=TwoWay}"
+                Visibility="{x:Bind ViewModel.Header, Mode=OneWay}" />
             <DatePicker
                 Margin="12,0,12,0"
+                Date="{x:Bind ViewModel.SetDate, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                 Header="Gesetztes Datum"
-                Language="de" />
+                Language="de"
+                Visibility="{x:Bind ViewModel.CustomeDate, Mode=OneWay}" />
             <Line
                 Canvas.Left="100"
                 Margin="0,10"
@@ -84,6 +114,7 @@
             Header="Inhalt"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             ScrollViewer.VerticalScrollBarVisibility="Auto"
+            Text="{x:Bind ViewModel.Content, Mode=TwoWay}"
             TextWrapping="Wrap" />
         <controls:GridSplitter
             Grid.RowSpan="4"
@@ -102,8 +133,14 @@
             Grid.Row="3"
             HorizontalAlignment="Right"
             Orientation="Horizontal">
-            <Button Margin="12" Content="Speichern" />
-            <Button Margin="0,0,12,0" Content="PDF erstellen" />
+            <Button
+                Margin="12"
+                Command="{x:Bind ViewModel.SaveCommand}"
+                Content="Speichern" />
+            <Button
+                Margin="0,0,12,0"
+                Command="{x:Bind ViewModel.CreateCommand}"
+                Content="PDF erstellen" />
         </StackPanel>
     </Grid>
 </Page>
