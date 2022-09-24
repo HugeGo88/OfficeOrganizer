@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using OfficeOrganizer.Core.Models;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 
@@ -60,6 +61,26 @@ public partial class WriterViewModel : ObservableObject
         if (file.FileType == ".md")
         {
             Content = File.ReadAllText(file.Path);
+        }
+        if (file.FileType == ".xml")
+        {
+            System.Xml.Serialization.XmlSerializer reader = new System.Xml.Serialization.XmlSerializer(typeof(Letter));
+            StreamReader xmlFile = new StreamReader(file.Path);
+            Letter letter = (Letter)reader.Deserialize(xmlFile);
+            if (letter == null)
+            {
+                return;
+            }
+            FirstName = letter.FirstName;
+            LastName = letter.LastName;
+            Company = letter.Company;
+            City = letter.City;
+            Street = letter.Street;
+            Content = letter.Content;
+            SetDate = letter.SetDate;
+            Header = letter.Header;
+            CustomeDate = letter.CustomeDate;
+            Signing = letter.Signing;
         }
     }
 
