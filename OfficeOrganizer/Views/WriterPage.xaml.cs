@@ -2,17 +2,16 @@
 using OfficeOrganizer.ViewModels;
 
 namespace OfficeOrganizer.Views;
-
-public sealed partial class MainPage : Page
+public sealed partial class WriterPage : Page
 {
-    public MainViewModel ViewModel
+    public WriterViewModel ViewModel
     {
         get;
     }
 
-    public MainPage()
+    public WriterPage()
     {
-        ViewModel = App.GetService<MainViewModel>();
+        ViewModel = App.GetService<WriterViewModel>();
         InitializeComponent();
     }
 }

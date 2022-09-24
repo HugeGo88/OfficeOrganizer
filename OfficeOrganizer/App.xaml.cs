@@ -85,6 +85,8 @@ public partial class App : Application
             //services.AddTransient<WebViewPage>();
             services.AddTransient<MainViewModel>();
             services.AddTransient<MainPage>();
+            services.AddTransient<WriterViewModel>();
+            services.AddTransient<WriterPage>();
             services.AddTransient<ShellPage>();
             services.AddTransient<ShellViewModel>();
 

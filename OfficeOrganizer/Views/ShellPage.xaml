@@ -51,6 +51,10 @@
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xe7c3;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+                <NavigationViewItem
+                    x:Uid="Shell_Writer"
+                    helpers:NavigationHelper.NavigateTo="OfficeOrganizer.ViewModels.WriterViewModel"
+                    Icon="Page2" />
                 <!--
                 <NavigationViewItem x:Uid="Shell_WebView" helpers:NavigationHelper.NavigateTo="OfficeOrganizer.ViewModels.WebViewViewModel">
                     <NavigationViewItem.Icon>

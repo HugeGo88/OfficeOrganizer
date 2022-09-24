@@ -67,6 +67,9 @@
   <data name="Shell_Main.Content" xml:space="preserve">
     <value>Main</value>
   </data>
+  <data name="Shell_Writer.Content" xml:space="preserve">
+    <value>Writer</value>
+  </data>
   <data name="WebView_Loading.Text" xml:space="preserve">
     <value>Loading...</value>
   </data>
