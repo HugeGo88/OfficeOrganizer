@@ -49,14 +49,18 @@ public partial class WriterViewModel : ObservableObject
     [ICommand]
     async void Load()
     {
-        string fileExtension = ".txt";
         var FilePicker = App.MainWindow.CreateOpenFilePicker();
         FilePicker.ViewMode = PickerViewMode.Thumbnail;
         FilePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
-        FilePicker.FileTypeFilter.Add(fileExtension);
+        FilePicker.FileTypeFilter.Add(".md");
+        FilePicker.FileTypeFilter.Add(".xml");
 
         StorageFile file = await FilePicker.PickSingleFileAsync();
-        Console.WriteLine($"{file}");
+
+        if (file.FileType == ".md")
+        {
+            Content = File.ReadAllText(file.Path);
+        }
     }
 
     [ICommand]
