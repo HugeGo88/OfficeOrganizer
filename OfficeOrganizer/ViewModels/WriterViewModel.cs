@@ -14,12 +14,32 @@ public partial class WriterViewModel : ObservableObject
     }
 
     [ObservableProperty]
-    Letter letter;
+    Letter? letter;
+
+    [ObservableProperty]
+    StorageFile? storageFile;
 
     [ICommand]
     void Save()
     {
-        Console.WriteLine($"{Letter.LastName} {Letter.FirstName}");
+        if (StorageFile is null)
+        {
+            Console.WriteLine($"{Letter!.LastName} {Letter.FirstName}");
+        }
+        else
+        {
+            if (StorageFile.FileType == ".md")
+            {
+                File.WriteAllText(StorageFile.Path, Letter!.Content);
+            }
+            else if (StorageFile.FileType == ".xml")
+            {
+                System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(Letter));
+                System.IO.FileStream file = System.IO.File.Create(StorageFile.Path);
+                writer.Serialize(file, Letter);
+                file.Close();
+            }
+        }
     }
 
     [ICommand]
@@ -31,25 +51,26 @@ public partial class WriterViewModel : ObservableObject
         FilePicker.FileTypeFilter.Add(".md");
         FilePicker.FileTypeFilter.Add(".xml");
 
-        StorageFile file = await FilePicker.PickSingleFileAsync();
+        StorageFile = await FilePicker.PickSingleFileAsync();
 
-        if (file.FileType == ".md")
+        if (StorageFile.FileType == ".md")
         {
-            Letter.Content = File.ReadAllText(file.Path);
+            Letter!.Content = File.ReadAllText(StorageFile.Path);
         }
-        if (file.FileType == ".xml")
+        if (StorageFile.FileType == ".xml")
         {
             System.Xml.Serialization.XmlSerializer reader = new System.Xml.Serialization.XmlSerializer(typeof(Letter));
-            StreamReader xmlFile = new StreamReader(file.Path);
+            StreamReader xmlFile = new StreamReader(StorageFile.Path);
             letter = (Letter)reader.Deserialize(xmlFile);
             OnPropertyChanged(nameof(Letter));
+            xmlFile.Close();
         }
     }
 
     [ICommand]
     void Create()
     {
-        Console.WriteLine($"{Letter.LastName} {Letter.FirstName}");
+        Console.WriteLine($"{Letter!.LastName} {Letter.FirstName}");
     }
 
 }
