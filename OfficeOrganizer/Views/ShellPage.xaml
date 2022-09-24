@@ -54,7 +54,7 @@
                 <NavigationViewItem
                     x:Uid="Shell_Writer"
                     helpers:NavigationHelper.NavigateTo="OfficeOrganizer.ViewModels.WriterViewModel"
-                    Icon="Page2" />
+                    Icon="Edit" />
                 <!--
                 <NavigationViewItem x:Uid="Shell_WebView" helpers:NavigationHelper.NavigateTo="OfficeOrganizer.ViewModels.WebViewViewModel">
                     <NavigationViewItem.Icon>
