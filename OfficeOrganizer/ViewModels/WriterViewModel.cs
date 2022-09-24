@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 
 namespace OfficeOrganizer.ViewModels;
 
@@ -45,9 +47,16 @@ public partial class WriterViewModel : ObservableObject
     }
 
     [ICommand]
-    void Load()
+    async void Load()
     {
-        Console.WriteLine($"{LastName} {FirstName}");
+        string fileExtension = ".txt";
+        var FilePicker = App.MainWindow.CreateOpenFilePicker();
+        FilePicker.ViewMode = PickerViewMode.Thumbnail;
+        FilePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+        FilePicker.FileTypeFilter.Add(fileExtension);
+
+        StorageFile file = await FilePicker.PickSingleFileAsync();
+        Console.WriteLine($"{file}");
     }
 
     [ICommand]
