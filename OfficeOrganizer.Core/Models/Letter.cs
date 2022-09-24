@@ -1,53 +1,35 @@
-﻿namespace OfficeOrganizer.Core.Models;
-public class Letter
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+
+namespace OfficeOrganizer.Core.Models;
+public partial class Letter : ObservableObject
 {
-    public bool Header
-    {
-        get; set;
-    }
+    [ObservableProperty]
+    public bool header;
 
-    public string Company
-    {
-        get; set;
-    }
+    [ObservableProperty]
+    public string company;
 
-    public string FirstName
-    {
-        get; set;
-    }
+    [ObservableProperty]
+    public string firstName;
 
-    public string LastName
-    {
-        get; set;
-    }
+    [ObservableProperty]
+    public string lastName;
 
-    public string Street
-    {
-        get; set;
-    }
+    [ObservableProperty]
+    public string street;
 
-    public string City
-    {
-        get; set;
-    }
+    [ObservableProperty]
+    public string city;
 
-    public bool Signing
-    {
-        get; set;
-    }
+    [ObservableProperty]
+    public bool signing;
 
-    public DateTimeOffset SetDate
-    {
-        get; set;
-    }
+    [ObservableProperty]
+    public DateTimeOffset setDate;
 
-    public bool CustomeDate
-    {
-        get; set;
-    }
+    [ObservableProperty]
+    public bool customeDate;
 
-    public string Content
-    {
-        get; set;
-    }
+    [ObservableProperty]
+    public string content;
 }

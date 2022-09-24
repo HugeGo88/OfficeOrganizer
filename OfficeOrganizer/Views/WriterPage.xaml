@@ -65,21 +65,21 @@
                 <CheckBox
                     Margin="12"
                     Content="Briefanschrift"
-                    IsChecked="{x:Bind ViewModel.Header, Mode=TwoWay}" />
+                    IsChecked="{x:Bind ViewModel.Letter.Header, Mode=TwoWay}" />
                 <CheckBox
                     Margin="12"
                     Content="Unterschrift"
-                    IsChecked="{x:Bind ViewModel.Signing, Mode=TwoWay}" />
+                    IsChecked="{x:Bind ViewModel.Letter.Signing, Mode=TwoWay}" />
                 <CheckBox
                     Margin="12"
                     Content="Datum setzen"
-                    IsChecked="{x:Bind ViewModel.CustomeDate, Mode=TwoWay}" />
+                    IsChecked="{x:Bind ViewModel.Letter.CustomeDate, Mode=TwoWay}" />
             </StackPanel>
             <TextBox
                 Margin="12,0,12,0"
                 Header="Firma"
-                Text="{x:Bind ViewModel.Company, Mode=TwoWay}"
-                Visibility="{x:Bind ViewModel.Header, Mode=OneWay}" />
+                Text="{x:Bind ViewModel.Letter.Company, Mode=TwoWay}"
+                Visibility="{x:Bind ViewModel.Letter.Header, Mode=OneWay}" />
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -88,31 +88,31 @@
                 <TextBox
                     Margin="12,0,12,0"
                     Header="Vorname"
-                    Text="{x:Bind ViewModel.FirstName, Mode=TwoWay}"
-                    Visibility="{x:Bind ViewModel.Header, Mode=OneWay}" />
+                    Text="{x:Bind ViewModel.Letter.FirstName, Mode=TwoWay}"
+                    Visibility="{x:Bind ViewModel.Letter.Header, Mode=OneWay}" />
                 <TextBox
                     Grid.Column="1"
                     Margin="12,0,12,0"
                     Header="Nachname"
-                    Text="{x:Bind ViewModel.LastName, Mode=TwoWay}"
-                    Visibility="{x:Bind ViewModel.Header, Mode=OneWay}" />
+                    Text="{x:Bind ViewModel.Letter.LastName, Mode=TwoWay}"
+                    Visibility="{x:Bind ViewModel.Letter.Header, Mode=OneWay}" />
             </Grid>
             <TextBox
                 Margin="12,0,12,0"
                 Header="Straßenname und Hausnummer"
-                Text="{x:Bind ViewModel.Street, Mode=TwoWay}"
-                Visibility="{x:Bind ViewModel.Header, Mode=OneWay}" />
+                Text="{x:Bind ViewModel.Letter.Street, Mode=TwoWay}"
+                Visibility="{x:Bind ViewModel.Letter.Header, Mode=OneWay}" />
             <TextBox
                 Margin="12,0,12,0"
                 Header="Postleitzahl und Ort"
-                Text="{x:Bind ViewModel.City, Mode=TwoWay}"
-                Visibility="{x:Bind ViewModel.Header, Mode=OneWay}" />
+                Text="{x:Bind ViewModel.Letter.City, Mode=TwoWay}"
+                Visibility="{x:Bind ViewModel.Letter.Header, Mode=OneWay}" />
             <DatePicker
                 Margin="12,0,12,0"
-                Date="{x:Bind ViewModel.SetDate, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                Date="{x:Bind ViewModel.Letter.SetDate, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                 Header="Gesetztes Datum"
                 Language="de"
-                Visibility="{x:Bind ViewModel.CustomeDate, Mode=OneWay}" />
+                Visibility="{x:Bind ViewModel.Letter.CustomeDate, Mode=OneWay}" />
             <Line
                 Canvas.Left="100"
                 Margin="0,10"
@@ -132,7 +132,7 @@
             Header="Inhalt"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             ScrollViewer.VerticalScrollBarVisibility="Auto"
-            Text="{x:Bind ViewModel.Content, Mode=TwoWay}"
+            Text="{x:Bind ViewModel.Letter.Content, Mode=TwoWay}"
             TextWrapping="Wrap" />
         <controls:GridSplitter
             Grid.RowSpan="4"

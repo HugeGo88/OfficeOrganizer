@@ -10,41 +10,16 @@ public partial class WriterViewModel : ObservableObject
 {
     public WriterViewModel()
     {
+        Letter = new();
     }
-    [ObservableProperty]
-    string? firstName;
 
     [ObservableProperty]
-    string? lastName;
-
-    [ObservableProperty]
-    string? city;
-
-    [ObservableProperty]
-    string? street;
-
-    [ObservableProperty]
-    string? company;
-
-    [ObservableProperty]
-    string? content;
-
-    [ObservableProperty]
-    DateTimeOffset setDate;
-
-    [ObservableProperty]
-    bool header;
-
-    [ObservableProperty]
-    bool customeDate;
-
-    [ObservableProperty]
-    bool signing;
+    Letter letter;
 
     [ICommand]
     void Save()
     {
-        Console.WriteLine($"{LastName} {FirstName}");
+        Console.WriteLine($"{Letter.LastName} {Letter.FirstName}");
     }
 
     [ICommand]
@@ -60,34 +35,21 @@ public partial class WriterViewModel : ObservableObject
 
         if (file.FileType == ".md")
         {
-            Content = File.ReadAllText(file.Path);
+            Letter.Content = File.ReadAllText(file.Path);
         }
         if (file.FileType == ".xml")
         {
             System.Xml.Serialization.XmlSerializer reader = new System.Xml.Serialization.XmlSerializer(typeof(Letter));
             StreamReader xmlFile = new StreamReader(file.Path);
-            Letter letter = (Letter)reader.Deserialize(xmlFile);
-            if (letter == null)
-            {
-                return;
-            }
-            FirstName = letter.FirstName;
-            LastName = letter.LastName;
-            Company = letter.Company;
-            City = letter.City;
-            Street = letter.Street;
-            Content = letter.Content;
-            SetDate = letter.SetDate;
-            Header = letter.Header;
-            CustomeDate = letter.CustomeDate;
-            Signing = letter.Signing;
+            letter = (Letter)reader.Deserialize(xmlFile);
+            OnPropertyChanged(nameof(Letter));
         }
     }
 
     [ICommand]
     void Create()
     {
-        Console.WriteLine($"{LastName} {FirstName}");
+        Console.WriteLine($"{Letter.LastName} {Letter.FirstName}");
     }
 
 }
