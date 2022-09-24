@@ -15,11 +15,11 @@ public class PageService : IPageService
     public PageService()
     {
         Configure<MainViewModel, MainPage>();
-        Configure<WebViewViewModel, WebViewPage>();
-        Configure<DataGridViewModel, DataGridPage>();
-        Configure<ContentGridViewModel, ContentGridPage>();
-        Configure<ContentGridDetailViewModel, ContentGridDetailPage>();
-        Configure<ListDetailsViewModel, ListDetailsPage>();
+        //Configure<WebViewViewModel, WebViewPage>();
+        //Configure<DataGridViewModel, DataGridPage>();
+        //Configure<ContentGridViewModel, ContentGridPage>();
+        //Configure<ContentGridDetailViewModel, ContentGridDetailPage>();
+        //Configure<ListDetailsViewModel, ListDetailsPage>();
         Configure<SettingsViewModel, SettingsPage>();
     }
 
