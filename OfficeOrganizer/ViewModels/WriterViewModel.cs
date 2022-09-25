@@ -20,11 +20,16 @@ public partial class WriterViewModel : ObservableObject
     StorageFile? storageFile;
 
     [ICommand]
-    void Save()
+    async void Save()
     {
         if (StorageFile is null)
         {
-            Console.WriteLine($"{Letter!.LastName} {Letter.FirstName}");
+            var FilePicker = App.MainWindow.CreateSaveFilePicker();
+            FilePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+            FilePicker.FileTypeChoices.Add("Markdown", new List<string>() { ".md" });
+            FilePicker.FileTypeChoices.Add("XML", new List<string>() { ".xml" });
+            FilePicker.SuggestedFileName = "New Document";
+            StorageFile = await FilePicker.PickSaveFileAsync();
         }
         else
         {
@@ -35,7 +40,7 @@ public partial class WriterViewModel : ObservableObject
             else if (StorageFile.FileType == ".xml")
             {
                 System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(Letter));
-                System.IO.FileStream file = System.IO.File.Create(StorageFile.Path);
+                FileStream file = System.IO.File.Create(StorageFile.Path);
                 writer.Serialize(file, Letter);
                 file.Close();
             }
@@ -61,10 +66,21 @@ public partial class WriterViewModel : ObservableObject
         {
             System.Xml.Serialization.XmlSerializer reader = new System.Xml.Serialization.XmlSerializer(typeof(Letter));
             StreamReader xmlFile = new StreamReader(StorageFile.Path);
-            letter = (Letter)reader.Deserialize(xmlFile);
+            if (Letter != null)
+            {
+                Letter = reader.Deserialize(xmlFile) as Letter;
+            }
             OnPropertyChanged(nameof(Letter));
             xmlFile.Close();
         }
+    }
+
+    [ICommand]
+    void New()
+    {
+        StorageFile = null;
+        letter = new();
+        OnPropertyChanged(nameof(Letter));
     }
 
     [ICommand]

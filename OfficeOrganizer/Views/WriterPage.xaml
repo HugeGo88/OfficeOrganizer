@@ -24,6 +24,16 @@
                 Grid.Column="1"
                 Width="130"
                 Margin="0,0,12,0"
+                Command="{x:Bind ViewModel.NewCommand}">
+                <StackPanel>
+                    <SymbolIcon Symbol="Add" />
+                    <TextBlock Text="Neu" />
+                </StackPanel>
+            </Button>
+            <Button
+                Grid.Column="1"
+                Width="130"
+                Margin="0,0,12,0"
                 Command="{x:Bind ViewModel.LoadCommand}">
                 <StackPanel>
                     <SymbolIcon Symbol="OpenLocal" />
