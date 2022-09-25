@@ -26,24 +26,24 @@ public partial class WriterViewModel : ObservableObject
         {
             var FilePicker = App.MainWindow.CreateSaveFilePicker();
             FilePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
-            FilePicker.FileTypeChoices.Add("Markdown", new List<string>() { ".md" });
             FilePicker.FileTypeChoices.Add("XML", new List<string>() { ".xml" });
+            FilePicker.FileTypeChoices.Add("Markdown", new List<string>() { ".md" });
             FilePicker.SuggestedFileName = "New Document";
             StorageFile = await FilePicker.PickSaveFileAsync();
         }
-        else
+        if (StorageFile is null)
+            return;
+
+        if (StorageFile.FileType == ".md")
         {
-            if (StorageFile.FileType == ".md")
-            {
-                File.WriteAllText(StorageFile.Path, Letter!.Content);
-            }
-            else if (StorageFile.FileType == ".xml")
-            {
-                System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(Letter));
-                FileStream file = System.IO.File.Create(StorageFile.Path);
-                writer.Serialize(file, Letter);
-                file.Close();
-            }
+            File.WriteAllText(StorageFile.Path, Letter!.Content);
+        }
+        else if (StorageFile.FileType == ".xml")
+        {
+            System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(Letter));
+            FileStream file = File.Create(StorageFile.Path);
+            writer.Serialize(file, Letter);
+            file.Close();
         }
     }
 
