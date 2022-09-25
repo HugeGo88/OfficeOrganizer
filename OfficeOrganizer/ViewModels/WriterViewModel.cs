@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using OfficeOrganizer.Core.Contracts.Services;
 using OfficeOrganizer.Core.Models;
 using Windows.Storage;
 using Windows.Storage.Pickers;
@@ -8,9 +9,12 @@ namespace OfficeOrganizer.ViewModels;
 
 public partial class WriterViewModel : ObservableObject
 {
-    public WriterViewModel()
+    private readonly ILetterService _letterService;
+
+    public WriterViewModel(ILetterService letterService)
     {
         Letter = new();
+        _letterService = letterService;
     }
 
     [ObservableProperty]
@@ -20,7 +24,7 @@ public partial class WriterViewModel : ObservableObject
     StorageFile? storageFile;
 
     [ICommand]
-    async void Save()
+    async Task Save()
     {
         if (StorageFile is null)
         {
@@ -30,6 +34,7 @@ public partial class WriterViewModel : ObservableObject
             FilePicker.FileTypeChoices.Add("Markdown", new List<string>() { ".md" });
             FilePicker.SuggestedFileName = "New Document";
             StorageFile = await FilePicker.PickSaveFileAsync();
+            Letter.Path = StorageFile.Path;
         }
         if (StorageFile is null)
             return;
@@ -48,7 +53,7 @@ public partial class WriterViewModel : ObservableObject
     }
 
     [ICommand]
-    async void Load()
+    async Task Load()
     {
         var FilePicker = App.MainWindow.CreateOpenFilePicker();
         FilePicker.ViewMode = PickerViewMode.Thumbnail;
@@ -72,6 +77,7 @@ public partial class WriterViewModel : ObservableObject
             if (Letter != null)
             {
                 Letter = reader.Deserialize(xmlFile) as Letter;
+                Letter!.Path = StorageFile.Path;
             }
             OnPropertyChanged(nameof(Letter));
             xmlFile.Close();
@@ -87,9 +93,11 @@ public partial class WriterViewModel : ObservableObject
     }
 
     [ICommand]
-    void Create()
+    async Task Create()
     {
-        Console.WriteLine($"{Letter!.LastName} {Letter.FirstName}");
+        if (StorageFile == null)
+            await Save();
+        _letterService.CreatePdf(Letter);
     }
 
 }

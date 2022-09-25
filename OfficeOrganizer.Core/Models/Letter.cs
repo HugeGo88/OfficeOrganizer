@@ -70,4 +70,10 @@ public partial class Letter : ObservableObject
     /// </summary>
     [ObservableProperty]
     public string content;
+
+    /// <summary>
+    /// path of the letter
+    /// </summary>
+    [ObservableProperty]
+    public string path;
 }
