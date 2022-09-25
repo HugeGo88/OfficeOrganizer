@@ -221,4 +221,22 @@
   <data name="LetterView_LoadButton.Text" xml:space="preserve">
     <value>Load</value>
   </data>
+  <data name="LetterView_CreateButton.Text" xml:space="preserve">
+    <value>Create PDF</value>
+  </data>
+  <data name="LetterView_CustomDate.Content" xml:space="preserve">
+    <value>Custom Date</value>
+  </data>
+  <data name="LetterView_Header.Content" xml:space="preserve">
+    <value>Letter Head</value>
+  </data>
+  <data name="LetterView_NewButton.Text" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="LetterView_SaveButton.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="LetterView_Signingn.Content" xml:space="preserve">
+    <value>Signing</value>
+  </data>
 </root>

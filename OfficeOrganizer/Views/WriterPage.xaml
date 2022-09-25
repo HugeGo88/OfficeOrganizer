@@ -27,7 +27,7 @@
                 Command="{x:Bind ViewModel.NewCommand}">
                 <StackPanel>
                     <SymbolIcon Symbol="Add" />
-                    <TextBlock Text="Neu" />
+                    <TextBlock x:Uid="LetterView_NewButton" />
                 </StackPanel>
             </Button>
             <Button
@@ -46,7 +46,7 @@
                 Command="{x:Bind ViewModel.SaveCommand}">
                 <StackPanel>
                     <SymbolIcon Symbol="SaveLocal" />
-                    <TextBlock Text="Spechern" />
+                    <TextBlock x:Uid="LetterView_SaveButton" />
                 </StackPanel>
             </Button>
             <Button
@@ -55,7 +55,7 @@
                 Command="{x:Bind ViewModel.CreateCommand}">
                 <StackPanel>
                     <SymbolIcon Symbol="Share" />
-                    <TextBlock Text="PDF erstellen" />
+                    <TextBlock x:Uid="LetterView_CreateButton" />
                 </StackPanel>
             </Button>
         </StackPanel>
@@ -73,16 +73,16 @@
                 Y2="0" />
             <StackPanel Orientation="Horizontal">
                 <CheckBox
+                    x:Uid="LetterView_Header"
                     Margin="12"
-                    Content="Briefanschrift"
                     IsChecked="{x:Bind ViewModel.Letter.Header, Mode=TwoWay}" />
                 <CheckBox
+                    x:Uid="LetterView_Signingn"
                     Margin="12"
-                    Content="Unterschrift"
                     IsChecked="{x:Bind ViewModel.Letter.Signing, Mode=TwoWay}" />
                 <CheckBox
+                    x:Uid="LetterView_CustomDate"
                     Margin="12"
-                    Content="Datum setzen"
                     IsChecked="{x:Bind ViewModel.Letter.CustomeDate, Mode=TwoWay}" />
             </StackPanel>
             <TextBox

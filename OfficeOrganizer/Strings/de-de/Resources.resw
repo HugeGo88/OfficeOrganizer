@@ -124,82 +124,82 @@
     <value>OfficeOrganizer</value>
   </data>
   <data name="Shell_Main.Content" xml:space="preserve">
-    <value>Main</value>
+    <value>Haupt</value>
   </data>
   <data name="Shell_Writer.Content" xml:space="preserve">
     <value>Brief</value>
   </data>
   <data name="WebView_Loading.Text" xml:space="preserve">
-    <value>Loading...</value>
+    <value>Lade...</value>
   </data>
   <data name="WebView_FailedMessage.Text" xml:space="preserve">
-    <value>Page failed to load. Check connection and reload.</value>
+    <value>Seite konnte nicht geladen werden. Überprüfe Verbindung und versuche es nochmal</value>
   </data>
   <data name="BrowserBackButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
-    <value>Browser back</value>
+    <value>Nach hinten browsen</value>
   </data>
   <data name="BrowserBackButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
-    <value>Browser back</value>
+    <value>Nach hinten browsen</value>
   </data>
   <data name="BrowserForwardButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
-    <value>Browser forward</value>
+    <value>Nach vorne browsen</value>
   </data>
   <data name="BrowserForwardButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
-    <value>Browser forward</value>
+    <value>Nach vorne browsen</value>
   </data>
   <data name="WebView_Reload.Content" xml:space="preserve">
-    <value>Reload</value>
+    <value>Neu laden</value>
   </data>
   <data name="ReloadButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
-    <value>Reload</value>
+    <value>Neu laden</value>
   </data>
   <data name="ReloadButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
-    <value>Reload</value>
+    <value>Neu laden</value>
   </data>
   <data name="OpenInBrowserButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
-    <value>Open in browser</value>
+    <value>Im Browser öffnen</value>
   </data>
   <data name="OpenInBrowserButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
-    <value>Open in browser</value>
+    <value>Im Browser öffnen</value>
   </data>
   <data name="Shell_WebView.Content" xml:space="preserve">
-    <value>WebView</value>
+    <value>Webansicht</value>
   </data>
   <data name="Shell_DataGrid.Content" xml:space="preserve">
-    <value>DataGrid</value>
+    <value>Datengitter</value>
   </data>
   <data name="Shell_ContentGrid.Content" xml:space="preserve">
-    <value>ContentGrid</value>
+    <value>Inhaltsgitter</value>
   </data>
   <data name="ListDetails_NoSelection.Text" xml:space="preserve">
-    <value>Select an item from the list.</value>
+    <value>Wähle ein Element aus der Liste.</value>
   </data>
   <data name="Shell_ListDetails.Content" xml:space="preserve">
-    <value>ListDetails</value>
+    <value>Listendetails</value>
   </data>
   <data name="Settings_Personalization.Text" xml:space="preserve">
-    <value>Personalization</value>
+    <value>Personalisieren</value>
   </data>
   <data name="Settings_Theme.Text" xml:space="preserve">
     <value>Theme</value>
   </data>
   <data name="Settings_Theme_Light.Content" xml:space="preserve">
-    <value>Light</value>
+    <value>Hell</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
-    <value>Dark</value>
+    <value>Dunkel</value>
   </data>
   <data name="Settings_Theme_Default.Content" xml:space="preserve">
-    <value>Default</value>
+    <value>Standard</value>
   </data>
   <data name="Settings_About.Text" xml:space="preserve">
-    <value>About this application</value>
+    <value>Über dieses Programm</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>TODO: Replace with your app description.</value>
+    <value>TODO: Ersätze mit deiner Programm Beschreibung</value>
   </data>
   <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
-    <value>Privacy Statement</value>
+    <value>Datenschutz</value>
   </data>
   <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
     <value>https://YourPrivacyUrlGoesHere/</value>
@@ -220,5 +220,23 @@
   </data>
   <data name="LetterView_LoadButton.Text" xml:space="preserve">
     <value>Laden</value>
+  </data>
+  <data name="LetterView_CreateButton.Text" xml:space="preserve">
+    <value>PDF erstellen</value>
+  </data>
+  <data name="LetterView_CustomDate.Content" xml:space="preserve">
+    <value>Datum setzen</value>
+  </data>
+  <data name="LetterView_Header.Content" xml:space="preserve">
+    <value>Briefanschrift</value>
+  </data>
+  <data name="LetterView_NewButton.Text" xml:space="preserve">
+    <value>Neu</value>
+  </data>
+  <data name="LetterView_SaveButton.Text" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="LetterView_Signingn.Content" xml:space="preserve">
+    <value>Unterschrift</value>
   </data>
 </root>
