@@ -219,6 +219,6 @@
 &lt;/toast&gt;</value>
   </data>
   <data name="LetterView_LoadButton.Text" xml:space="preserve">
-    <value>Load</value>
+    <value>Laden</value>
   </data>
 </root>

@@ -37,7 +37,7 @@
                 Command="{x:Bind ViewModel.LoadCommand}">
                 <StackPanel>
                     <SymbolIcon Symbol="OpenLocal" />
-                    <TextBlock Text="Laden" />
+                    <TextBlock x:Uid="LetterView_LoadButton" />
                 </StackPanel>
             </Button>
             <Button
@@ -121,7 +121,7 @@
                 Margin="12,0,12,0"
                 Date="{x:Bind ViewModel.Letter.SetDate, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                 Header="Gesetztes Datum"
-                Language="de"
+                Language="de-DE"
                 Visibility="{x:Bind ViewModel.Letter.CustomeDate, Mode=OneWay}" />
             <Line
                 Canvas.Left="100"
