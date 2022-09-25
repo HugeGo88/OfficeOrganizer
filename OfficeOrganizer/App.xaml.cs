@@ -83,8 +83,8 @@ public partial class App : Application
             //services.AddTransient<DataGridPage>();
             //services.AddTransient<WebViewViewModel>();
             //services.AddTransient<WebViewPage>();
-            services.AddTransient<MainViewModel>();
-            services.AddTransient<MainPage>();
+            //services.AddTransient<MainViewModel>();
+            //services.AddTransient<MainPage>();
             services.AddTransient<WriterViewModel>();
             services.AddTransient<WriterPage>();
             services.AddTransient<ShellPage>();

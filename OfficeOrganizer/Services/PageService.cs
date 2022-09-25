@@ -14,7 +14,7 @@ public class PageService : IPageService
 
     public PageService()
     {
-        Configure<MainViewModel, MainPage>();
+        //Configure<MainViewModel, MainPage>();
         Configure<WriterViewModel, WriterPage>();
         //Configure<WebViewViewModel, WebViewPage>();
         //Configure<DataGridViewModel, DataGridPage>();
