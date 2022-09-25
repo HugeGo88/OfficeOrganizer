@@ -58,6 +58,9 @@ public partial class WriterViewModel : ObservableObject
 
         StorageFile = await FilePicker.PickSingleFileAsync();
 
+        if (StorageFile is null)
+            return;
+
         if (StorageFile.FileType == ".md")
         {
             Letter!.Content = File.ReadAllText(StorageFile.Path);
