@@ -218,25 +218,25 @@
   &lt;/actions&gt;
 &lt;/toast&gt;</value>
   </data>
-  <data name="LetterView_LoadButton.Text" xml:space="preserve">
+  <data name="WriterView_LoadButton.Label" xml:space="preserve">
     <value>Laden</value>
   </data>
-  <data name="LetterView_CreateButton.Text" xml:space="preserve">
+  <data name="WriterView_CreateButton.Label" xml:space="preserve">
     <value>PDF erstellen</value>
   </data>
-  <data name="LetterView_CustomDate.Content" xml:space="preserve">
+  <data name="WriterView_CustomDate.Content" xml:space="preserve">
     <value>Datum setzen</value>
   </data>
-  <data name="LetterView_Header.Content" xml:space="preserve">
+  <data name="WriterView_Header.Content" xml:space="preserve">
     <value>Briefanschrift</value>
   </data>
-  <data name="LetterView_NewButton.Text" xml:space="preserve">
+  <data name="WriterView_NewButton.Label" xml:space="preserve">
     <value>Neu</value>
   </data>
-  <data name="LetterView_SaveButton.Text" xml:space="preserve">
+  <data name="WriterView_SaveButton.Label" xml:space="preserve">
     <value>Speichern</value>
   </data>
-  <data name="LetterView_Signingn.Content" xml:space="preserve">
+  <data name="WriterView_Signingn.Content" xml:space="preserve">
     <value>Unterschrift</value>
   </data>
 </root>

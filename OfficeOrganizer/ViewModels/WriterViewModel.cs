@@ -26,7 +26,7 @@ public partial class WriterViewModel : ObservableObject
     [ICommand]
     async Task Save()
     {
-        if (StorageFile is null)
+        if (StorageFile is null || StorageFile.Path is null)
         {
             var FilePicker = App.MainWindow.CreateSaveFilePicker();
             FilePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;

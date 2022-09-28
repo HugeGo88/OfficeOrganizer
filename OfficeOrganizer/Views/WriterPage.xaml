@@ -19,47 +19,41 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-            <Button
-                Grid.Column="1"
-                Width="130"
-                Margin="0,0,12,0"
-                Command="{x:Bind ViewModel.NewCommand}">
-                <StackPanel>
-                    <SymbolIcon Symbol="Add" />
-                    <TextBlock x:Uid="LetterView_NewButton" />
-                </StackPanel>
-            </Button>
-            <Button
-                Grid.Column="1"
-                Width="130"
-                Margin="0,0,12,0"
-                Command="{x:Bind ViewModel.LoadCommand}">
-                <StackPanel>
-                    <SymbolIcon Symbol="OpenLocal" />
-                    <TextBlock x:Uid="LetterView_LoadButton" />
-                </StackPanel>
-            </Button>
-            <Button
-                Width="130"
-                Margin="0,0,12,0"
-                Command="{x:Bind ViewModel.SaveCommand}">
-                <StackPanel>
-                    <SymbolIcon Symbol="SaveLocal" />
-                    <TextBlock x:Uid="LetterView_SaveButton" />
-                </StackPanel>
-            </Button>
-            <Button
-                Width="130"
-                Margin="0,0,12,0"
-                Command="{x:Bind ViewModel.CreateCommand}">
-                <StackPanel>
-                    <SymbolIcon Symbol="Share" />
-                    <TextBlock x:Uid="LetterView_CreateButton" />
-                </StackPanel>
-            </Button>
-        </StackPanel>
+        <CommandBar
+            Margin="0,0,10,0"
+            Background="Transparent"
+            IsOpen="True">
+            <AppBarButton
+                x:Uid="WriterView_NewButton"
+                Command="{x:Bind ViewModel.NewCommand}"
+                Icon="Add">
+                <AppBarButton.KeyboardAccelerators>
+                    <KeyboardAccelerator Key="N" Modifiers="Control" />
+                </AppBarButton.KeyboardAccelerators>
 
+            </AppBarButton>
+            <AppBarButton
+                x:Uid="WriterView_LoadButton"
+                Command="{x:Bind ViewModel.LoadCommand}"
+                Icon="OpenLocal">
+                <AppBarButton.KeyboardAccelerators>
+                    <KeyboardAccelerator Key="O" Modifiers="Control" />
+                </AppBarButton.KeyboardAccelerators>
+            </AppBarButton>
+            <AppBarButton
+                x:Uid="WriterView_SaveButton"
+                Command="{x:Bind ViewModel.SaveCommand}"
+                Icon="SaveLocal">
+                <AppBarButton.KeyboardAccelerators>
+                    <KeyboardAccelerator Key="S" Modifiers="Control" />
+                </AppBarButton.KeyboardAccelerators>
+
+            </AppBarButton>
+            <AppBarButton
+                x:Uid="WriterView_CreateButton"
+                Command="{x:Bind ViewModel.CreateCommand}"
+                Icon="Share" />
+        </CommandBar>
         <StackPanel Grid.Row="1">
             <Line
                 Canvas.Left="100"
@@ -73,15 +67,15 @@
                 Y2="0" />
             <StackPanel Orientation="Horizontal">
                 <CheckBox
-                    x:Uid="LetterView_Header"
+                    x:Uid="WriterView_Header"
                     Margin="12"
                     IsChecked="{x:Bind ViewModel.Letter.Header, Mode=TwoWay}" />
                 <CheckBox
-                    x:Uid="LetterView_Signingn"
+                    x:Uid="WriterView_Signingn"
                     Margin="12"
                     IsChecked="{x:Bind ViewModel.Letter.Signing, Mode=TwoWay}" />
                 <CheckBox
-                    x:Uid="LetterView_CustomDate"
+                    x:Uid="WriterView_CustomDate"
                     Margin="12"
                     IsChecked="{x:Bind ViewModel.Letter.CustomeDate, Mode=TwoWay}" />
             </StackPanel>
