@@ -22,16 +22,8 @@
         <CommandBar
             Margin="0,0,10,0"
             Background="Transparent"
-            IsOpen="True">
-            <AppBarButton
-                x:Uid="WriterView_NewButton"
-                Command="{x:Bind ViewModel.NewCommand}"
-                Icon="Add">
-                <AppBarButton.KeyboardAccelerators>
-                    <KeyboardAccelerator Key="N" Modifiers="Control" />
-                </AppBarButton.KeyboardAccelerators>
-
-            </AppBarButton>
+            DefaultLabelPosition="Right"
+            IsOpen="False">
             <AppBarButton
                 x:Uid="WriterView_LoadButton"
                 Command="{x:Bind ViewModel.LoadCommand}"
@@ -47,12 +39,21 @@
                 <AppBarButton.KeyboardAccelerators>
                     <KeyboardAccelerator Key="S" Modifiers="Control" />
                 </AppBarButton.KeyboardAccelerators>
-
             </AppBarButton>
             <AppBarButton
                 x:Uid="WriterView_CreateButton"
                 Command="{x:Bind ViewModel.CreateCommand}"
                 Icon="Share" />
+            <CommandBar.SecondaryCommands>
+                <AppBarButton
+                    x:Uid="WriterView_DelteButton"
+                    Command="{x:Bind ViewModel.DeleteCommand}"
+                    Icon="Delete">
+                    <AppBarButton.KeyboardAccelerators>
+                        <KeyboardAccelerator Key="N" Modifiers="Control" />
+                    </AppBarButton.KeyboardAccelerators>
+                </AppBarButton>
+            </CommandBar.SecondaryCommands>
         </CommandBar>
         <StackPanel Grid.Row="1">
             <Line

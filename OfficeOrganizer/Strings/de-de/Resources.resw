@@ -230,8 +230,8 @@
   <data name="WriterView_Header.Content" xml:space="preserve">
     <value>Briefanschrift</value>
   </data>
-  <data name="WriterView_NewButton.Label" xml:space="preserve">
-    <value>Neu</value>
+  <data name="WriterView_DelteButton.Label" xml:space="preserve">
+    <value>Löschen</value>
   </data>
   <data name="WriterView_SaveButton.Label" xml:space="preserve">
     <value>Speichern</value>
