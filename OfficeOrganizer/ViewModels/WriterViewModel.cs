@@ -26,7 +26,7 @@ public partial class WriterViewModel : ObservableObject
     [ICommand]
     async Task Save()
     {
-        if (StorageFile != null && StorageFile.Path != null)
+        if (StorageFile is null)
         {
             var FilePicker = App.MainWindow.CreateSaveFilePicker();
             FilePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
@@ -34,7 +34,8 @@ public partial class WriterViewModel : ObservableObject
             FilePicker.FileTypeChoices.Add("Markdown", new List<string>() { ".md" });
             FilePicker.SuggestedFileName = "New Document";
             StorageFile = await FilePicker.PickSaveFileAsync();
-            Letter.Path = StorageFile.Path;
+            if (StorageFile?.Path != null)
+                Letter.Path = StorageFile.Path;
         }
         if (StorageFile is null)
             return;
