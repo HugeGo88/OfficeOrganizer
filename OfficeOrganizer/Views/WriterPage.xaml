@@ -142,7 +142,7 @@
                 Header="Postleitzahl und Ort"
                 Text="{x:Bind ViewModel.Letter.City, Mode=TwoWay}"
                 Visibility="{x:Bind ViewModel.Letter.Header, Mode=OneWay}" />
-            <DatePicker
+            <CalendarDatePicker
                 Margin="12,0,12,0"
                 Date="{x:Bind ViewModel.Letter.SetDate, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                 Header="Gesetztes Datum"
