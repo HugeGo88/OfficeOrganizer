@@ -24,8 +24,16 @@ public partial class WriterViewModel : ObservableObject
     StorageFile? storageFile;
 
     [ICommand]
+    async Task SaveAs()
+    {
+        StorageFile = null;
+        await Save();
+    }
+
+    [ICommand]
     async Task Save()
     {
+
         if (StorageFile is null)
         {
             var FilePicker = App.MainWindow.CreateSaveFilePicker();

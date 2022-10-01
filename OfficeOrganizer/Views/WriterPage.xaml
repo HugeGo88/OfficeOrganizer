@@ -19,42 +19,69 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <CommandBar
-            Margin="0,0,10,0"
-            Background="Transparent"
-            DefaultLabelPosition="Right"
-            IsOpen="False">
-            <AppBarButton
-                x:Uid="WriterView_LoadButton"
-                Command="{x:Bind ViewModel.LoadCommand}"
-                Icon="OpenLocal">
-                <AppBarButton.KeyboardAccelerators>
-                    <KeyboardAccelerator Key="O" Modifiers="Control" />
-                </AppBarButton.KeyboardAccelerators>
-            </AppBarButton>
-            <AppBarButton
-                x:Uid="WriterView_SaveButton"
-                Command="{x:Bind ViewModel.SaveCommand}"
-                Icon="SaveLocal">
-                <AppBarButton.KeyboardAccelerators>
-                    <KeyboardAccelerator Key="S" Modifiers="Control" />
-                </AppBarButton.KeyboardAccelerators>
-            </AppBarButton>
-            <AppBarButton
-                x:Uid="WriterView_CreateButton"
-                Command="{x:Bind ViewModel.CreateCommand}"
-                Icon="Share" />
-            <CommandBar.SecondaryCommands>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock VerticalAlignment="Center" Text="{x:Bind ViewModel.StorageFile.Path}" />
+            <CommandBar
+                Grid.Column="1"
+                Margin="0,0,10,0"
+                Background="Transparent"
+                DefaultLabelPosition="Right"
+                IsOpen="False">
                 <AppBarButton
-                    x:Uid="WriterView_DelteButton"
-                    Command="{x:Bind ViewModel.DeleteCommand}"
-                    Icon="Delete">
+                    x:Uid="WriterView_LoadButton"
+                    Command="{x:Bind ViewModel.LoadCommand}"
+                    Icon="OpenLocal">
                     <AppBarButton.KeyboardAccelerators>
-                        <KeyboardAccelerator Key="N" Modifiers="Control" />
+                        <KeyboardAccelerator Key="O" Modifiers="Control" />
                     </AppBarButton.KeyboardAccelerators>
                 </AppBarButton>
-            </CommandBar.SecondaryCommands>
-        </CommandBar>
+                <AppBarElementContainer>
+                    <SplitButton Command="{x:Bind ViewModel.SaveCommand}">
+                        <SplitButton.KeyboardAccelerators>
+                            <KeyboardAccelerator Key="S" Modifiers="Control" />
+                        </SplitButton.KeyboardAccelerators>
+                        <SplitButton.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Viewbox Height="16" Margin="0,2,0,0">
+                                    <SymbolIcon Symbol="SaveLocal" />
+                                </Viewbox>
+                                <TextBlock Margin="10,0,0,0" Text="Speichern" />
+                            </StackPanel>
+                        </SplitButton.Content>
+                        <SplitButton.Flyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem
+                                    Command="{x:Bind ViewModel.SaveAsCommand}"
+                                    Icon="Save"
+                                    Text="Speichern unter">
+                                    <MenuFlyoutItem.KeyboardAccelerators>
+                                        <KeyboardAccelerator Key="S" Modifiers="Control,Shift" />
+                                    </MenuFlyoutItem.KeyboardAccelerators>
+                                </MenuFlyoutItem>
+                            </MenuFlyout>
+                        </SplitButton.Flyout>
+                    </SplitButton>
+                </AppBarElementContainer>
+                <AppBarButton
+                    x:Uid="WriterView_CreateButton"
+                    Command="{x:Bind ViewModel.CreateCommand}"
+                    Icon="Share" />
+                <CommandBar.SecondaryCommands>
+                    <AppBarButton
+                        x:Uid="WriterView_DelteButton"
+                        Command="{x:Bind ViewModel.DeleteCommand}"
+                        Icon="Delete">
+                        <AppBarButton.KeyboardAccelerators>
+                            <KeyboardAccelerator Key="N" Modifiers="Control" />
+                        </AppBarButton.KeyboardAccelerators>
+                    </AppBarButton>
+                </CommandBar.SecondaryCommands>
+            </CommandBar>
+        </Grid>
         <StackPanel Grid.Row="1">
             <Line
                 Canvas.Left="100"
