@@ -14,7 +14,7 @@
 	<UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
     <NeutralLanguage>de-DE</NeutralLanguage>
-    <DefaultLanguage>de-de</DefaultLanguage>
+    <DefaultLanguage>de-DE</DefaultLanguage>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Views\WriterPage.xaml" />

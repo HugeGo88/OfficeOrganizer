@@ -54,6 +54,14 @@
                   </com:ExeServer>
               </com:ComServer>
           </com:Extension>
+          <uap:Extension Category="windows.fileTypeAssociation">
+              <uap:FileTypeAssociation Name="ool">
+                  <uap:SupportedFileTypes>
+                      <uap:FileType>.ool</uap:FileType>
+                  </uap:SupportedFileTypes>
+                  <uap:DisplayName>Office Organizer Letter</uap:DisplayName>
+              </uap:FileTypeAssociation>
+          </uap:Extension>
       </Extensions>
     </Application>
   </Applications>
