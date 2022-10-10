@@ -72,8 +72,6 @@ public partial class App : Application
             services.AddSingleton<ILetterService, LetterService>();
 
             // Views and ViewModels
-            services.AddTransient<SettingsViewModel>();
-            services.AddTransient<SettingsPage>();
             //services.AddTransient<ListDetailsViewModel>();
             //services.AddTransient<ListDetailsPage>();
             //services.AddTransient<ContentGridDetailViewModel>();
@@ -86,8 +84,10 @@ public partial class App : Application
             //services.AddTransient<WebViewPage>();
             //services.AddTransient<MainViewModel>();
             //services.AddTransient<MainPage>();
-            services.AddTransient<WriterViewModel>();
+            services.AddTransient<SettingsPage>();
+            services.AddTransient<SettingsViewModel>();
             services.AddTransient<WriterPage>();
+            services.AddTransient<WriterViewModel>();
             services.AddTransient<ShellPage>();
             services.AddTransient<ShellViewModel>();
 
@@ -110,6 +110,7 @@ public partial class App : Application
     protected async override void OnLaunched(LaunchActivatedEventArgs args)
     {
         base.OnLaunched(args);
+
 
         // TODO: Configure real notification
         // App.GetService<IAppNotificationService>().Show(string.Format("AppNotificationSamplePayload".GetLocalized(), AppContext.BaseDirectory));

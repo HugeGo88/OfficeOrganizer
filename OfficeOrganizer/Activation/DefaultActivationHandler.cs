@@ -1,5 +1,5 @@
 ﻿using Microsoft.UI.Xaml;
-
+using Microsoft.Windows.AppLifecycle;
 using OfficeOrganizer.Contracts.Services;
 using OfficeOrganizer.ViewModels;
 
@@ -22,7 +22,15 @@ public class DefaultActivationHandler : ActivationHandler<LaunchActivatedEventAr
 
     protected async override Task HandleInternalAsync(LaunchActivatedEventArgs args)
     {
-        _navigationService.NavigateTo(typeof(WriterViewModel).FullName!, args.Arguments);
+        AppActivationArguments openArgs = AppInstance.GetCurrent().GetActivatedEventArgs();
+        if (openArgs.Kind == ExtendedActivationKind.Launch)
+        {
+            _navigationService.NavigateTo(typeof(SettingsViewModel).FullName!, args.Arguments);
+        }
+        else if (openArgs.Kind == ExtendedActivationKind.File)
+        {
+            _navigationService.NavigateTo(typeof(WriterViewModel).FullName!, args.Arguments);
+        }
 
         await Task.CompletedTask;
     }

@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
@@ -176,7 +175,6 @@
             <controls:GridSplitter.RenderTransform>
                 <TranslateTransform X="-8" />
             </controls:GridSplitter.RenderTransform>
-
         </controls:GridSplitter>
         <WebView2
             Grid.Row="0"
