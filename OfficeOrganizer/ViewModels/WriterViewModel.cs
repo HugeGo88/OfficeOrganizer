@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Windows.AppLifecycle;
 using OfficeOrganizer.Core.Contracts.Services;
 using OfficeOrganizer.Core.Models;
+using Windows.ApplicationModel.Activation;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 
@@ -14,6 +16,17 @@ public partial class WriterViewModel : ObservableObject
     public WriterViewModel(ILetterService letterService)
     {
         Letter = new();
+        AppActivationArguments args = AppInstance.GetCurrent().GetActivatedEventArgs();
+        ExtendedActivationKind kind = args.Kind;
+        if (kind == ExtendedActivationKind.File)
+        {
+            if (args.Data is IFileActivatedEventArgs fileArgs)
+            {
+                IStorageItem file = fileArgs.Files.FirstOrDefault();
+                Letter = LoadLetter(file!.Path);
+                OnPropertyChanged(nameof(Letter));
+            }
+        }
         _letterService = letterService;
     }
 
@@ -33,7 +46,7 @@ public partial class WriterViewModel : ObservableObject
     [ICommand]
     async Task Save()
     {
-
+        // TODO Create Methode in Letter Service
         if (StorageFile is null)
         {
             var FilePicker = App.MainWindow.CreateSaveFilePicker();
@@ -76,31 +89,44 @@ public partial class WriterViewModel : ObservableObject
 
         StorageFile = await FilePicker.PickSingleFileAsync();
 
-        if (StorageFile is null)
-            return;
+        Letter = LoadLetter(StorageFile.Path);
 
-        if (StorageFile.FileType == ".md")
+        OnPropertyChanged(nameof(Letter));
+    }
+
+    // TODO Put this to Letter Service
+    Letter LoadLetter(string path)
+    {
+        Letter Letter = new();
+
+        if (String.IsNullOrEmpty(path))
+            return Letter;
+
+        if (path.EndsWith(".md"))
         {
-            Letter!.Content = File.ReadAllText(StorageFile.Path);
-            Letter!.Path = StorageFile.Path;
+            Letter!.Content = File.ReadAllText(path);
+            Letter!.Path = storageFile.Path;
+            return Letter;
         }
-        if (StorageFile.FileType == ".xml" || StorageFile.FileType == ".ool")
+        if (path.EndsWith(".xml") || path.EndsWith(".ool"))
         {
             System.Xml.Serialization.XmlSerializer reader = new System.Xml.Serialization.XmlSerializer(typeof(Letter));
-            StreamReader xmlFile = new StreamReader(StorageFile.Path);
+            StreamReader xmlFile = new StreamReader(path);
             if (Letter != null)
             {
                 Letter = reader.Deserialize(xmlFile) as Letter;
-                Letter!.Path = StorageFile.Path;
+                Letter!.Path = path;
+                return Letter;
             }
             xmlFile.Close();
         }
-        OnPropertyChanged(nameof(Letter));
+        return Letter!;
     }
 
     [ICommand]
     void Delete()
     {
+        // TODO Create Methode in Letter Service
         StorageFile = null;
         letter = new();
         OnPropertyChanged(nameof(Letter));
@@ -109,6 +135,8 @@ public partial class WriterViewModel : ObservableObject
     [ICommand]
     async Task Create()
     {
+        // TODO Rename into Generate
+        // TODO Create Methode in Letter Service
         if (StorageFile == null)
             await Save();
         _letterService.CreatePdf(Letter);

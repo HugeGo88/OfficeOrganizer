@@ -25,7 +25,7 @@ public class DefaultActivationHandler : ActivationHandler<LaunchActivatedEventAr
         AppActivationArguments openArgs = AppInstance.GetCurrent().GetActivatedEventArgs();
         if (openArgs.Kind == ExtendedActivationKind.Launch)
         {
-            _navigationService.NavigateTo(typeof(SettingsViewModel).FullName!, args.Arguments);
+            _navigationService.NavigateTo(typeof(MainViewModel).FullName!, args.Arguments);
         }
         else if (openArgs.Kind == ExtendedActivationKind.File)
         {

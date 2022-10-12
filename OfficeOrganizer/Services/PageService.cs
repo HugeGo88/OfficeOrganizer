@@ -14,13 +14,13 @@ public class PageService : IPageService
 
     public PageService()
     {
-        //Configure<MainViewModel, MainPage>();
-        Configure<WriterViewModel, WriterPage>();
         //Configure<WebViewViewModel, WebViewPage>();
         //Configure<DataGridViewModel, DataGridPage>();
         //Configure<ContentGridViewModel, ContentGridPage>();
         //Configure<ContentGridDetailViewModel, ContentGridDetailPage>();
         //Configure<ListDetailsViewModel, ListDetailsPage>();
+        Configure<MainViewModel, MainPage>();
+        Configure<WriterViewModel, WriterPage>();
         Configure<SettingsViewModel, SettingsPage>();
     }
 

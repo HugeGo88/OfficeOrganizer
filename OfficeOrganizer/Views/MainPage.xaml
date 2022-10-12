@@ -7,6 +7,11 @@
     mc:Ignorable="d">
 
     <Grid x:Name="ContentArea">
-        
+        <TextBlock
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="50">
+            Wilkommen im Office Organizer
+        </TextBlock>
     </Grid>
 </Page>
