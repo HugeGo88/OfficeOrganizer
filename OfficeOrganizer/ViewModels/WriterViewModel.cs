@@ -36,6 +36,9 @@ public partial class WriterViewModel : ObservableObject
     [ObservableProperty]
     StorageFile? storageFile;
 
+    [ObservableProperty]
+    Uri webUri;
+
     [RelayCommand]
     async Task SaveAs()
     {
@@ -140,6 +143,13 @@ public partial class WriterViewModel : ObservableObject
         if (StorageFile == null)
             await Save();
         _letterService.CreatePdf(Letter);
+    }
+
+    [RelayCommand]
+    public void UpdateWebView()
+    {
+        var html = Markdig.Markdown.ToHtml(Letter.Content);
+        Console.WriteLine("");
     }
 
 }
