@@ -36,14 +36,14 @@ public partial class WriterViewModel : ObservableObject
     [ObservableProperty]
     StorageFile? storageFile;
 
-    [ICommand]
+    [RelayCommand]
     async Task SaveAs()
     {
         StorageFile = null;
         await Save();
     }
 
-    [ICommand]
+    [RelayCommand]
     async Task Save()
     {
         // TODO Create Methode in Letter Service
@@ -77,7 +77,7 @@ public partial class WriterViewModel : ObservableObject
         }
     }
 
-    [ICommand]
+    [RelayCommand]
     async Task Load()
     {
         var FilePicker = App.MainWindow.CreateOpenFilePicker();
@@ -123,7 +123,7 @@ public partial class WriterViewModel : ObservableObject
         return Letter!;
     }
 
-    [ICommand]
+    [RelayCommand]
     void Delete()
     {
         // TODO Create Methode in Letter Service
@@ -132,7 +132,7 @@ public partial class WriterViewModel : ObservableObject
         OnPropertyChanged(nameof(Letter));
     }
 
-    [ICommand]
+    [RelayCommand]
     async Task Create()
     {
         // TODO Rename into Generate
