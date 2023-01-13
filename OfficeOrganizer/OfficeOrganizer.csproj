@@ -35,6 +35,30 @@
   <ItemGroup>
     <ProjectReference Include="..\OfficeOrganizer.Core\OfficeOrganizer.Core.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Assets\HtmlTemplates\addressField.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Assets\HtmlTemplates\example.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Assets\HtmlTemplates\footer.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Assets\HtmlTemplates\index.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Assets\HtmlTemplates\signing.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Assets\HtmlTemplates\supportFiles\dreiecke.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Assets\HtmlTemplates\supportFiles\logo.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
