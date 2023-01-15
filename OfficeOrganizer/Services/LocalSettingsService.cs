@@ -5,8 +5,6 @@ using OfficeOrganizer.Core.Contracts.Services;
 using OfficeOrganizer.Core.Helpers;
 using OfficeOrganizer.Helpers;
 using OfficeOrganizer.Models;
-
-using Windows.ApplicationModel;
 using Windows.Storage;
 
 namespace OfficeOrganizer.Services;
@@ -19,7 +17,7 @@ public class LocalSettingsService : ILocalSettingsService
     private readonly IFileService _fileService;
     private readonly LocalSettingsOptions _options;
 
-    private readonly string _localApplicationData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+    private readonly string _localApplicationData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
     private readonly string _applicationDataFolder;
     private readonly string _localsettingsFile;
 

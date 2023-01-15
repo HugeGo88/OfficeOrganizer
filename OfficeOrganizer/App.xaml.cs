@@ -1,6 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml;
+using NLog.Extensions.Logging;
+
 
 using OfficeOrganizer.Activation;
 using OfficeOrganizer.Contracts.Services;
@@ -65,11 +68,19 @@ public partial class App : Application
             services.AddSingleton<IActivationService, ActivationService>();
             services.AddSingleton<IPageService, PageService>();
             services.AddSingleton<INavigationService, NavigationService>();
+            services.AddLogging(loggingBuilder =>
+            {
+                loggingBuilder.ClearProviders();
+                loggingBuilder.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+                loggingBuilder.AddNLog();
+            })
+            .BuildServiceProvider();
 
             // Core Services
             services.AddSingleton<ISampleDataService, SampleDataService>();
             services.AddSingleton<IFileService, FileService>();
             services.AddSingleton<ILetterService, LetterService>();
+
 
             // Views and ViewModels
             //services.AddTransient<ListDetailsViewModel>();

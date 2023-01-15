@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Windows.AppLifecycle;
+using NLog;
 using OfficeOrganizer.Core.Contracts.Services;
 using OfficeOrganizer.Core.Models;
 using Windows.ApplicationModel.Activation;
@@ -12,6 +13,7 @@ namespace OfficeOrganizer.ViewModels;
 public partial class WriterViewModel : ObservableObject
 {
     private readonly ILetterService _letterService;
+    readonly Logger logger = LogManager.GetCurrentClassLogger();
 
     public WriterViewModel(ILetterService letterService)
     {
@@ -49,6 +51,7 @@ public partial class WriterViewModel : ObservableObject
     [RelayCommand]
     async Task Save()
     {
+        logger.Info("Try to save file");
         // TODO Create Methode in Letter Service
         if (StorageFile is null)
         {
@@ -65,14 +68,26 @@ public partial class WriterViewModel : ObservableObject
                 Letter!.Path = StorageFile.Path;
         }
         if (StorageFile is null)
+        {
+            logger.Info("Cancel file selection");
             return;
+        }
 
         if (StorageFile.FileType == ".md")
         {
-            File.WriteAllText(StorageFile.Path, Letter!.Content);
+            try
+            {
+                logger.Info("Try to save *.md");
+                File.WriteAllText(StorageFile.Path, Letter!.Content);
+            }
+            catch (Exception ex)
+            {
+                logger.Info("Could not save file", ex);
+            }
         }
         else if (StorageFile.FileType == ".xml" || StorageFile.FileType == ".ool")
         {
+            logger.Info("Try to save *.xml or *.ool");
             System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(Letter));
             FileStream file = File.Create(StorageFile.Path);
             writer.Serialize(file, Letter);
