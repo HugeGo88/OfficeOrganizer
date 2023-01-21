@@ -30,7 +30,7 @@ public sealed partial class WriterPage : Page
         var writer = new StringWriter();
         var renderer = new HtmlRenderer(writer);
         MarkdownPipeline? pipeline = null;
-        pipeline = pipeline ?? new MarkdownPipelineBuilder().UseAdvancedExtensions().UsePipeTables().Build();
+        pipeline ??= new MarkdownPipelineBuilder().UseAdvancedExtensions().UsePipeTables().Build();
         pipeline.Setup(renderer);
         StringBuilder html = new();
         html.Append(indexHtmlContent);

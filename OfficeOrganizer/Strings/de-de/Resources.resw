@@ -228,7 +228,7 @@
     <value>Datum setzen</value>
   </data>
   <data name="WriterView_Header.Content" xml:space="preserve">
-    <value>Briefanschrift</value>
+    <value>Briefkopf</value>
   </data>
   <data name="WriterView_DelteButton.Label" xml:space="preserve">
     <value>Löschen</value>

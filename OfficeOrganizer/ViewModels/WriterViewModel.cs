@@ -33,13 +33,13 @@ public partial class WriterViewModel : ObservableObject
     }
 
     [ObservableProperty]
-    Letter letter;
+    Letter letter = new();
 
     [ObservableProperty]
     StorageFile? storageFile;
 
     [ObservableProperty]
-    Uri webUri;
+    Uri? webUri;
 
     [RelayCommand]
     async Task SaveAs()
@@ -73,8 +73,8 @@ public partial class WriterViewModel : ObservableObject
             return;
         }
 
-        Letter.fileType = StorageFile!.FileType;
-        Letter.path = StorageFile.Path;
+        Letter.FileType = StorageFile!.FileType;
+        Letter.Path = StorageFile.Path;
         _letterService.Save(Letter);
     }
 
