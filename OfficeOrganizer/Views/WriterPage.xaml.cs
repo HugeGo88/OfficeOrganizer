@@ -22,7 +22,7 @@ public sealed partial class WriterPage : Page
 
     private async void TextBox_TextChanged(object sender, TextChangedEventArgs e)
     {
-        var indexHtml = Path.Combine(Directory.GetCurrentDirectory(), @"Assets\HtmlTemplates\index.html");
+        var indexHtml = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"OfficeOrganizer\Assets\HtmlTemplates\index.html");
         if (String.IsNullOrEmpty(indexHtmlContent))
         {
             indexHtmlContent = File.ReadAllText(indexHtml);

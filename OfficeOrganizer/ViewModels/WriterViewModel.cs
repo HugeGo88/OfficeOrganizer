@@ -26,6 +26,7 @@ public partial class WriterViewModel : ObservableObject
             if (args.Data is IFileActivatedEventArgs fileArgs)
             {
                 var file = fileArgs.Files.FirstOrDefault();
+                logger.Info("Launch app and try to load file {path}", file!.Path);
                 Letter = _letterService.Load(file!.Path);
                 OnPropertyChanged(nameof(Letter));
             }
