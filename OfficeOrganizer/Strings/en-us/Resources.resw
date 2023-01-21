@@ -129,6 +129,9 @@
   <data name="Shell_Writer.Content" xml:space="preserve">
     <value>Brief</value>
   </data>
+  <data name="Shell_Log.Content" xml:space="preserve">
+    <value>Log</value>
+  </data>
   <data name="WebView_Loading.Text" xml:space="preserve">
     <value>Loading...</value>
   </data>

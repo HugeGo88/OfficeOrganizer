@@ -78,6 +78,12 @@
                 </NavigationViewItem>
                 -->
             </NavigationView.MenuItems>
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem
+                    x:Uid="Shell_Log"
+                    helpers:NavigationHelper.NavigateTo="OfficeOrganizer.ViewModels.LogViewModel"
+                    Icon="Bookmarks" />
+            </NavigationView.FooterMenuItems>
             <NavigationView.HeaderTemplate>
                 <DataTemplate>
                     <Grid>

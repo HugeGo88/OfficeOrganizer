@@ -21,6 +21,7 @@ public class PageService : IPageService
         //Configure<ListDetailsViewModel, ListDetailsPage>();
         Configure<MainViewModel, MainPage>();
         Configure<WriterViewModel, WriterPage>();
+        Configure<LogViewModel, LogPage>();
         Configure<SettingsViewModel, SettingsPage>();
     }
 

@@ -77,9 +77,9 @@ public partial class App : Application
             .BuildServiceProvider();
 
             // Core Services
-            services.AddSingleton<ISampleDataService, SampleDataService>();
+            //services.AddSingleton<ISampleDataService, SampleDataService>();
             services.AddSingleton<IFileService, FileService>();
-            services.AddSingleton<ILetterService, LetterService>();
+            services.AddTransient<ILetterService, LetterService>();
 
 
             // Views and ViewModels
@@ -97,8 +97,10 @@ public partial class App : Application
             services.AddTransient<MainViewModel>();
             services.AddTransient<SettingsPage>();
             services.AddTransient<SettingsViewModel>();
+            services.AddTransient<LogPage>();
+            services.AddTransient<LogViewModel>();
             services.AddTransient<WriterPage>();
-            services.AddTransient<WriterViewModel>();
+            services.AddSingleton<WriterViewModel>();
             services.AddTransient<ShellPage>();
             services.AddTransient<ShellViewModel>();
 
