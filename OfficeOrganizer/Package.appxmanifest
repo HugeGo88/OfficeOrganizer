@@ -60,6 +60,7 @@
                       <uap:FileType>.ool</uap:FileType>
                   </uap:SupportedFileTypes>
                   <uap:DisplayName>Office Organizer Letter</uap:DisplayName>
+                  <uap:Logo>Assets\OfficeOrganizer.png</uap:Logo>
               </uap:FileTypeAssociation>
           </uap:Extension>
       </Extensions>
