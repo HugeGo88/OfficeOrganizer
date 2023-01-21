@@ -24,8 +24,11 @@ public partial class LogViewModel : ObservableObject
         if (!File.Exists(logPath)) { return; }
         try
         {
-            var readLines = File.ReadAllLines(logPath);
-            logContent = string.Join("\n", readLines?.Reverse() ?? new string[0]);
+            using (var f = new FileStream(logPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (var s = new StreamReader(f))
+            {
+                logContent = s.ReadToEnd();
+            }
             OnPropertyChanged(nameof(LogContent));
         }
         catch (Exception ex)
