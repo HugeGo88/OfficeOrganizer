@@ -77,21 +77,28 @@ public partial class WriterViewModel : ObservableObject
         {
             try
             {
-                logger.Info("Try to save *.md");
+                logger.Info("Try to save *.md to", StorageFile.Path);
                 File.WriteAllText(StorageFile.Path, Letter!.Content);
             }
             catch (Exception ex)
             {
-                logger.Info("Could not save file", ex);
+                logger.Error("Could not save file", ex);
             }
         }
         else if (StorageFile.FileType == ".xml" || StorageFile.FileType == ".ool")
         {
-            logger.Info("Try to save *.xml or *.ool");
-            System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(Letter));
-            FileStream file = File.Create(StorageFile.Path);
-            writer.Serialize(file, Letter);
-            file.Close();
+            try
+            {
+                logger.Info("Try to save *.xml or *.ool to", StorageFile.Path);
+                System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(Letter));
+                FileStream file = File.Create(StorageFile.Path);
+                writer.Serialize(file, Letter);
+                file.Close();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Could not save file", ex);
+            }
         }
     }
 

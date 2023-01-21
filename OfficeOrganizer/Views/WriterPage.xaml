@@ -108,6 +108,11 @@
                     x:Uid="WriterView_CustomDate"
                     Margin="12"
                     IsChecked="{x:Bind ViewModel.Letter.CustomeDate, Mode=TwoWay}" />
+                <CalendarDatePicker
+                Margin="12,0,12,0"
+                Date="{x:Bind ViewModel.Letter.SetDate, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                Language="de-DE"
+                Visibility="{x:Bind ViewModel.Letter.CustomeDate, Mode=OneWay}" />
             </StackPanel>
             <TextBox
                 Margin="12,0,12,0"
@@ -141,12 +146,6 @@
                 Header="Postleitzahl und Ort"
                 Text="{x:Bind ViewModel.Letter.City, Mode=TwoWay}"
                 Visibility="{x:Bind ViewModel.Letter.Header, Mode=OneWay}" />
-            <CalendarDatePicker
-                Margin="12,0,12,0"
-                Date="{x:Bind ViewModel.Letter.SetDate, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
-                Header="Gesetztes Datum"
-                Language="de-DE"
-                Visibility="{x:Bind ViewModel.Letter.CustomeDate, Mode=OneWay}" />
             <Line
                 Canvas.Left="100"
                 Margin="0,10"
