@@ -25,7 +25,7 @@ public partial class WriterViewModel : ObservableObject
             if (args.Data is IFileActivatedEventArgs fileArgs)
             {
                 IStorageItem file = fileArgs.Files.FirstOrDefault();
-                Letter = LoadLetter(file!.Path);
+                Letter = _letterService.Load(file!.Path);
                 OnPropertyChanged(nameof(Letter));
             }
         }
@@ -52,7 +52,6 @@ public partial class WriterViewModel : ObservableObject
     async Task Save()
     {
         logger.Info("Try to save file");
-        // TODO Create Methode in Letter Service
         if (StorageFile is null)
         {
             var FilePicker = App.MainWindow.CreateSaveFilePicker();
@@ -73,38 +72,15 @@ public partial class WriterViewModel : ObservableObject
             return;
         }
 
-        if (StorageFile.FileType == ".md")
-        {
-            try
-            {
-                logger.Info("Try to save *.md to", StorageFile.Path);
-                File.WriteAllText(StorageFile.Path, Letter!.Content);
-            }
-            catch (Exception ex)
-            {
-                logger.Error("Could not save file", ex);
-            }
-        }
-        else if (StorageFile.FileType == ".xml" || StorageFile.FileType == ".ool")
-        {
-            try
-            {
-                logger.Info("Try to save *.xml or *.ool to", StorageFile.Path);
-                System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(Letter));
-                FileStream file = File.Create(StorageFile.Path);
-                writer.Serialize(file, Letter);
-                file.Close();
-            }
-            catch (Exception ex)
-            {
-                logger.Error("Could not save file", ex);
-            }
-        }
+        letter.fileType = storageFile!.FileType;
+        letter.path = storageFile.Path;
+        _letterService.Save(letter);
     }
 
     [RelayCommand]
     async Task Load()
     {
+        logger.Info("Try to load file");
         var FilePicker = App.MainWindow.CreateOpenFilePicker();
         FilePicker.ViewMode = PickerViewMode.Thumbnail;
         FilePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
@@ -113,55 +89,29 @@ public partial class WriterViewModel : ObservableObject
         FilePicker.FileTypeFilter.Add(".xml");
 
         StorageFile = await FilePicker.PickSingleFileAsync();
+        if (StorageFile == null)
+        {
+            return;
+        }
 
-        Letter = LoadLetter(StorageFile.Path);
+        Letter = _letterService.Load(StorageFile.Path);
 
         OnPropertyChanged(nameof(Letter));
-    }
-
-    // TODO Put this to Letter Service
-    Letter LoadLetter(string path)
-    {
-        Letter Letter = new();
-
-        if (String.IsNullOrEmpty(path))
-            return Letter;
-
-        if (path.EndsWith(".md"))
-        {
-            Letter!.Content = File.ReadAllText(path);
-            Letter!.Path = storageFile.Path;
-            return Letter;
-        }
-        if (path.EndsWith(".xml") || path.EndsWith(".ool"))
-        {
-            System.Xml.Serialization.XmlSerializer reader = new System.Xml.Serialization.XmlSerializer(typeof(Letter));
-            StreamReader xmlFile = new StreamReader(path);
-            if (Letter != null)
-            {
-                Letter = reader.Deserialize(xmlFile) as Letter;
-                Letter!.Path = path;
-                return Letter;
-            }
-            xmlFile.Close();
-        }
-        return Letter!;
     }
 
     [RelayCommand]
     void Delete()
     {
-        // TODO Create Methode in Letter Service
+        logger.Info("Delete file content");
         StorageFile = null;
         letter = new();
         OnPropertyChanged(nameof(Letter));
     }
 
     [RelayCommand]
-    async Task Create()
+    async Task Generate()
     {
-        // TODO Rename into Generate
-        // TODO Create Methode in Letter Service
+        logger.Info("GeneratePdf");
         if (StorageFile == null)
             await Save();
         _letterService.CreatePdf(Letter);

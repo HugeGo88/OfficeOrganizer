@@ -76,4 +76,10 @@ public partial class Letter : ObservableObject
     /// </summary>
     [ObservableProperty]
     public string path;
+
+    /// <summary>
+    /// file type of letter
+    /// </summary>
+    [ObservableProperty]
+    public string fileType;
 }

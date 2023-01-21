@@ -70,7 +70,7 @@
                 </AppBarElementContainer>
                 <AppBarButton
                     x:Uid="WriterView_CreateButton"
-                    Command="{x:Bind ViewModel.CreateCommand}"
+                    Command="{x:Bind ViewModel.GenerateCommand}"
                     Icon="Share" />
                 <CommandBar.SecondaryCommands>
                     <AppBarButton
