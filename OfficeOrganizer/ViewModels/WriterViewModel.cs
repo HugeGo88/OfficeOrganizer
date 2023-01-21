@@ -18,6 +18,7 @@ public partial class WriterViewModel : ObservableObject
     public WriterViewModel(ILetterService letterService)
     {
         Letter = new();
+        _letterService = letterService;
         AppActivationArguments args = AppInstance.GetCurrent().GetActivatedEventArgs();
         ExtendedActivationKind kind = args.Kind;
         if (kind == ExtendedActivationKind.File)
@@ -29,7 +30,6 @@ public partial class WriterViewModel : ObservableObject
                 OnPropertyChanged(nameof(Letter));
             }
         }
-        _letterService = letterService;
     }
 
     [ObservableProperty]
@@ -54,6 +54,7 @@ public partial class WriterViewModel : ObservableObject
         logger.Info("Try to save file");
         if (StorageFile is null)
         {
+            logger.Info("Open save as dialog");
             var FilePicker = App.MainWindow.CreateSaveFilePicker();
             FilePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
             FilePicker.SuggestedFileName = "NewLetter";
