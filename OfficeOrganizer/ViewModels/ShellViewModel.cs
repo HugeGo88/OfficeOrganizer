@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 using Microsoft.UI.Xaml.Navigation;
-
+using NLog;
 using OfficeOrganizer.Contracts.Services;
 using OfficeOrganizer.Views;
 
@@ -9,6 +9,7 @@ namespace OfficeOrganizer.ViewModels;
 
 public class ShellViewModel : ObservableRecipient
 {
+    readonly Logger logger = LogManager.GetCurrentClassLogger();
     private bool _isBackEnabled;
     private object? _selected;
 
@@ -43,6 +44,7 @@ public class ShellViewModel : ObservableRecipient
 
     private void OnNavigated(object sender, NavigationEventArgs e)
     {
+        logger.Info("Changed view to {view}", e.SourcePageType);
         IsBackEnabled = NavigationService.CanGoBack;
 
         if (e.SourcePageType == typeof(SettingsPage))

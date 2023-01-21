@@ -1,10 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using NLog;
 
 namespace OfficeOrganizer.ViewModels;
 
 public partial class LogViewModel : ObservableObject
 {
+    readonly Logger logger = LogManager.GetCurrentClassLogger();
+
     public LogViewModel()
     {
         logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"OfficeOrganizer\logData.log");
@@ -21,19 +24,20 @@ public partial class LogViewModel : ObservableObject
     [RelayCommand]
     void LoadLog()
     {
-        if (!File.Exists(logPath)) { return; }
+        if (!File.Exists(LogPath)) { return; }
         try
         {
-            using (var f = new FileStream(logPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (var f = new FileStream(LogPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (var s = new StreamReader(f))
             {
-                logContent = s.ReadToEnd();
+                LogContent = s.ReadToEnd();
             }
+            LogContent = string.Join("\r\n", LogContent.Split('\r', '\n').Reverse());
             OnPropertyChanged(nameof(LogContent));
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex.Message);
+            logger.Error("Couldn't read log file {message}", ex.Message);
         }
     }
 }

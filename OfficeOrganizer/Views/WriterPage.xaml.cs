@@ -12,9 +12,7 @@ public sealed partial class WriterPage : Page
         get;
     }
 
-    string indexHtmlContent;
-
-
+    string indexHtmlContent = string.Empty;
 
     public WriterPage()
     {

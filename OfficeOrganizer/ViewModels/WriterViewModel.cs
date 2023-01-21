@@ -25,7 +25,7 @@ public partial class WriterViewModel : ObservableObject
         {
             if (args.Data is IFileActivatedEventArgs fileArgs)
             {
-                IStorageItem file = fileArgs.Files.FirstOrDefault();
+                var file = fileArgs.Files.FirstOrDefault();
                 Letter = _letterService.Load(file!.Path);
                 OnPropertyChanged(nameof(Letter));
             }
@@ -33,7 +33,7 @@ public partial class WriterViewModel : ObservableObject
     }
 
     [ObservableProperty]
-    Letter? letter;
+    Letter letter;
 
     [ObservableProperty]
     StorageFile? storageFile;
@@ -73,9 +73,9 @@ public partial class WriterViewModel : ObservableObject
             return;
         }
 
-        letter.fileType = storageFile!.FileType;
-        letter.path = storageFile.Path;
-        _letterService.Save(letter);
+        Letter.fileType = StorageFile!.FileType;
+        Letter.path = StorageFile.Path;
+        _letterService.Save(Letter);
     }
 
     [RelayCommand]
@@ -105,7 +105,7 @@ public partial class WriterViewModel : ObservableObject
     {
         logger.Info("Delete file content");
         StorageFile = null;
-        letter = new();
+        Letter = new();
         OnPropertyChanged(nameof(Letter));
     }
 
@@ -116,13 +116,6 @@ public partial class WriterViewModel : ObservableObject
         if (StorageFile == null)
             await Save();
         _letterService.CreatePdf(Letter);
-    }
-
-    [RelayCommand]
-    public void UpdateWebView()
-    {
-        var html = Markdig.Markdown.ToHtml(Letter.Content);
-        Console.WriteLine("");
     }
 
 }

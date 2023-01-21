@@ -20,7 +20,7 @@
                 Text="{x:Bind ViewModel.LogPath}" />
         </StackPanel>
         <ScrollViewer Grid.Row="1">
-            <TextBlock LineHeight="25" Text="{x:Bind ViewModel.LogContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock LineHeight="20" Text="{x:Bind ViewModel.LogContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </ScrollViewer>
     </Grid>
 </Page>
