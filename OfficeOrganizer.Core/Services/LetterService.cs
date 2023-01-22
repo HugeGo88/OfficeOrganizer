@@ -9,6 +9,8 @@ public class LetterService : ILetterService
 
     public void CreatePdf(Letter letter)
     {
+        logger.Info("Try to generate PDF {path}", letter.Path);
+
         var supportDir = @"c:\temp\OO";
         var htmlPath = @$"{supportDir}\temp.html";
 
@@ -24,25 +26,25 @@ public class LetterService : ILetterService
 
     public void Save(Letter letter)
     {
-        if (letter.fileType == ".md")
+        if (letter.FileType == ".md")
         {
             try
             {
-                logger.Info("Try to save *.md to {path}", letter.path);
-                File.WriteAllText(letter.path, letter!.Content);
+                logger.Info("Try to save *.md to {path}", letter.Path);
+                File.WriteAllText(letter.Path, letter!.Content);
             }
             catch (Exception ex)
             {
                 logger.Error("Could not save file", ex);
             }
         }
-        else if (letter.fileType == ".xml" || letter.fileType == ".ool")
+        else if (letter.FileType == ".xml" || letter.FileType == ".ool")
         {
             try
             {
-                logger.Info("Try to save *.xml or *.ool to {path}", letter.path);
+                logger.Info("Try to save *.xml or *.ool to {path}", letter.Path);
                 System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(Letter));
-                FileStream file = File.Create(letter.path);
+                FileStream file = File.Create(letter.Path);
                 writer.Serialize(file, letter);
                 file.Close();
             }
