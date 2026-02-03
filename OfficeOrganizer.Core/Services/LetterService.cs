@@ -1,4 +1,9 @@
-﻿using NLog;
+﻿using System.Diagnostics;
+using System.Text;
+using Markdig;
+using Markdig.Renderers;
+using Microsoft.Win32;
+using NLog;
 using OfficeOrganizer.Core.Contracts.Services;
 using OfficeOrganizer.Core.Models;
 
@@ -20,8 +25,92 @@ public class LetterService : ILetterService
         var pdfPath = Path.ChangeExtension(letter.Path, ".pdf");
 
         logger.Trace($"{letter}");
+        try
+        {
+            string letterContent = MarkDownToHtml(letter.Content);
+            RenderPdf(letterContent, pdfPath);
+        }
+        catch (Exception ex)
+        {
+            logger.Error("Could not create PDF", ex);
+        }
 
         // TODO continue here
+    }
+
+    private string MarkDownToHtml(string content)
+    {
+        var writer = new StringWriter();
+        var renderer = new HtmlRenderer(writer);
+        MarkdownPipeline? pipeline = null;
+        pipeline ??= new MarkdownPipelineBuilder().UseAdvancedExtensions().UsePipeTables().Build();
+        pipeline.Setup(renderer);
+        StringBuilder html = new();
+        string markDownHtml = Markdig.Markdown.ToHtml(content, pipeline);
+        string htmlTemplate = File.ReadAllText("Assets/HtmlTemplates/index.html");
+        return htmlTemplate.Replace("{{CONTENT}}", markDownHtml);
+    }
+
+    private string RenderPdf(string html, string path, string htmlTemplatePath = "")
+    {
+        string templatePathHtml = Path.Combine(Path.GetTempPath(), "template.html");
+        string folderPath = Directory.GetParent(path).ToString();
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+        File.WriteAllText($"{templatePathHtml}", html);
+
+        string pathToExe = GetPathForExe("msedge.exe");
+        string userDataDir = Path.Combine(Path.GetTempPath(), "edge-headless-user-data");
+        Directory.CreateDirectory(userDataDir);
+
+        ProcessStartInfo ps = new ProcessStartInfo
+        {
+            FileName = pathToExe,
+            Arguments = $"--headless --disable-gpu --user-data-dir=\"{userDataDir}\" --print-to-pdf-no-header --run-all-compositor-stages-before-draw --virtual-time-budget=5000 --print-to-pdf=\"{path}\" \"{templatePathHtml}\"",
+            CreateNoWindow = true,
+            UseShellExecute = false,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true
+        };
+
+        using Process converter = Process.Start(ps);
+        converter.WaitForExit(); // Wait for process to finish
+
+        int exitCode = converter.ExitCode;
+        string output = converter.StandardOutput.ReadToEnd();
+        string error = converter.StandardError.ReadToEnd();
+
+        if (exitCode != 0)
+        {
+            // Log or display error details
+            logger.Error($"Process failed with exit code {exitCode}. Error: {error}");
+            //TODO needs to be fixed
+            //MessageBox.Show($"PDF creation failed. Exit code: {exitCode}\nError: {error}", "PDF Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return "";
+        }
+        else
+        {
+            // Success
+            //TODO needs to ne fixed
+            //PdfPath = SelectedItem.PdfPath;
+            return path;
+        }
+    }
+
+    private string GetPathForExe(string fileName)
+    {
+        string keyBase = @"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths";
+        RegistryKey localMachine = Registry.LocalMachine;
+        RegistryKey fileKey = localMachine.OpenSubKey(String.Format(@"{0}\{1}", keyBase, fileName));
+        object result = null;
+        if (fileKey != null)
+        {
+            result = fileKey.GetValue(String.Empty);
+            fileKey.Close();
+        }
+        return (string)result;
     }
 
     public void Save(Letter letter)

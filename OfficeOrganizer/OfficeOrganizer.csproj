@@ -39,19 +39,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Assets\HtmlTemplates\addressField.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Update="Assets\HtmlTemplates\example.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="Assets\HtmlTemplates\footer.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Update="Assets\HtmlTemplates\index.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="Assets\HtmlTemplates\signing.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="Assets\HtmlTemplates\supportFiles\dreiecke.svg">
