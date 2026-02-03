@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Text;
 using Markdig;
 using Markdig.Renderers;
 using Microsoft.Win32;
@@ -17,7 +16,6 @@ public class LetterService : ILetterService
         logger.Info("Try to generate PDF {path}", letter.Path);
 
         var supportDir = @"c:\temp\OO";
-        var htmlPath = @$"{supportDir}\temp.html";
 
         if (!Directory.Exists(supportDir)) { Directory.CreateDirectory(supportDir); }
         if (!Directory.Exists(@$"{supportDir}\supportFiles")) { Directory.CreateDirectory(@$"{supportDir}\supportFiles"); }
@@ -27,7 +25,7 @@ public class LetterService : ILetterService
         logger.Trace($"{letter}");
         try
         {
-            string letterContent = MarkDownToHtml(letter.Content);
+            var letterContent = MarkDownToHtml(letter.Content);
             RenderPdf(letterContent, pdfPath);
         }
         catch (Exception ex)
@@ -42,27 +40,26 @@ public class LetterService : ILetterService
     {
         var writer = new StringWriter();
         var renderer = new HtmlRenderer(writer);
-        MarkdownPipeline? pipeline = null;
+        MarkdownPipeline pipeline = null;
         pipeline ??= new MarkdownPipelineBuilder().UseAdvancedExtensions().UsePipeTables().Build();
         pipeline.Setup(renderer);
-        StringBuilder html = new();
-        string markDownHtml = Markdig.Markdown.ToHtml(content, pipeline);
-        string htmlTemplate = File.ReadAllText("Assets/HtmlTemplates/index.html");
+        var markDownHtml = Markdig.Markdown.ToHtml(content, pipeline);
+        var htmlTemplate = File.ReadAllText("Assets/HtmlTemplates/index.html");
         return htmlTemplate.Replace("{{CONTENT}}", markDownHtml);
     }
 
     private string RenderPdf(string html, string path, string htmlTemplatePath = "")
     {
-        string templatePathHtml = Path.Combine(Path.GetTempPath(), "template.html");
-        string folderPath = Directory.GetParent(path).ToString();
+        var templatePathHtml = Path.Combine(Path.GetTempPath(), "template.html");
+        var folderPath = Directory.GetParent(path).ToString();
         if (!Directory.Exists(folderPath))
         {
             Directory.CreateDirectory(folderPath);
         }
         File.WriteAllText($"{templatePathHtml}", html);
 
-        string pathToExe = GetPathForExe("msedge.exe");
-        string userDataDir = Path.Combine(Path.GetTempPath(), "edge-headless-user-data");
+        var pathToExe = GetPathForExe("msedge.exe");
+        var userDataDir = Path.Combine(Path.GetTempPath(), "edge-headless-user-data");
         Directory.CreateDirectory(userDataDir);
 
         ProcessStartInfo ps = new ProcessStartInfo
@@ -78,9 +75,9 @@ public class LetterService : ILetterService
         using Process converter = Process.Start(ps);
         converter.WaitForExit(); // Wait for process to finish
 
-        int exitCode = converter.ExitCode;
-        string output = converter.StandardOutput.ReadToEnd();
-        string error = converter.StandardError.ReadToEnd();
+        var exitCode = converter.ExitCode;
+        var output = converter.StandardOutput.ReadToEnd();
+        var error = converter.StandardError.ReadToEnd();
 
         if (exitCode != 0)
         {
@@ -101,7 +98,7 @@ public class LetterService : ILetterService
 
     private string GetPathForExe(string fileName)
     {
-        string keyBase = @"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths";
+        var keyBase = @"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths";
         RegistryKey localMachine = Registry.LocalMachine;
         RegistryKey fileKey = localMachine.OpenSubKey(String.Format(@"{0}\{1}", keyBase, fileName));
         object result = null;
