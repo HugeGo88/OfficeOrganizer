@@ -19,7 +19,7 @@ public class LetterService : ILetterService
 
         var pdfPath = Path.ChangeExtension(letter.Path, ".pdf");
 
-        Console.WriteLine($"{letter}");
+        logger.Trace($"{letter}");
 
         // TODO continue here
     }
