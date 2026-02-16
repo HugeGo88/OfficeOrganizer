@@ -116,7 +116,7 @@ public partial class WriterViewModel : ObservableObject
         logger.Info("GeneratePdf");
         if (StorageFile == null)
             await Save();
-        _letterService.CreatePdf(Letter);
+        webUri = new Uri(_letterService.CreatePdf(Letter));
     }
 
 }

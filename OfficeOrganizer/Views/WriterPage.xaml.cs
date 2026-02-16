@@ -34,7 +34,8 @@ public sealed partial class WriterPage : Page
         pipeline.Setup(renderer);
         StringBuilder html = new();
         html.Append(indexHtmlContent);
-        html.Replace("{CONTENT}", Markdig.Markdown.ToHtml(ContentBox.Text, pipeline));
+        html = new StringBuilder();
+        html.Append(Markdig.Markdown.ToHtml(ContentBox.Text, pipeline));
         await WebView.EnsureCoreWebView2Async();
         WebView.NavigateToString(html.ToString());
     }

@@ -11,7 +11,19 @@ public class LetterService : ILetterService
 {
     readonly Logger logger = LogManager.GetCurrentClassLogger();
 
-    public void CreatePdf(Letter letter)
+    private readonly Dictionary<string, string> replacementStrings = new()
+    {
+        { "CLUB_NAME", "CVJM Walheim e.V." },
+        { "CLUB_STREET", "Hauptstraße 66, 74399 Walheim" },
+        { "CLUB_HOMEPAGE", "www.cvjm-walheim.de" },
+        { "CLUB_BANK", "VR-Bank Ludwigsburg eG" },
+        { "CLUB_BIC", "GENODES1VBB" },
+        { "CLUB_IBAN", "DE10 6049 1430 0390 5390 07" },
+        { "CLUB_PHONE", "+49 (0)175 2000 509" },
+        { "LEADER", "Hugo Tausch" },
+    };
+
+    public string CreatePdf(Letter letter)
     {
         logger.Info("Try to generate PDF {path}", letter.Path);
 
@@ -26,14 +38,14 @@ public class LetterService : ILetterService
         try
         {
             var letterContent = MarkDownToHtml(letter.Content);
-            RenderPdf(letterContent, pdfPath);
+            return RenderPdf(letterContent, pdfPath);
         }
         catch (Exception ex)
         {
             logger.Error("Could not create PDF", ex);
         }
 
-        // TODO continue here
+        return "";
     }
 
     private string MarkDownToHtml(string content)
@@ -45,6 +57,10 @@ public class LetterService : ILetterService
         pipeline.Setup(renderer);
         var markDownHtml = Markdig.Markdown.ToHtml(content, pipeline);
         var htmlTemplate = File.ReadAllText("Assets/HtmlTemplates/index.html");
+        foreach (var replacement in replacementStrings)
+        {
+            htmlTemplate = htmlTemplate.Replace($"{{{{{replacement.Key}}}}}", replacement.Value);
+        }
         return htmlTemplate.Replace("{{CONTENT}}", markDownHtml);
     }
 
